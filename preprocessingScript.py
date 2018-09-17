@@ -96,3 +96,5 @@ users['favorites_per_tweet'] = np.array(favs_per_tweet_list)
 writer = pd.ExcelWriter('cresci2017Preprocessed.xlsx', engine='xlsxwriter')
 users.to_excel(writer, sheet_name='Sheet1')
 writer.save()
+
+users.to_csv('cresci2017Preprocessed.csv')
