@@ -67,6 +67,7 @@ type(cresci2015_tweets['timestamp'].values[0])
 type(pd.to_datetime(cresci2015_tweets['timestamp']))
 test = pd.to_datetime(cresci2015_tweets['timestamp'])
 
+index = 0
 for item in cresci2015_users['id']:
     tweets_stat_map = get_tweet_stats(item,cresci2015_tweets)
     men_per_tweet_list.append(tweets_stat_map['num_mentions'])
@@ -75,12 +76,14 @@ for item in cresci2015_users['id']:
     retweets_per_tweet_list.append(tweets_stat_map['retweet_count'])
     favorite_per_tweet_list.append(tweets_stat_map['favorite_count'])
     frequ_minutes_tweet_list.append(tweets_stat_map['frequ_minutes_tweet'])
+    print(index)
+    index = index + 1
 
-users['men_per_tweets'] = np.array(men_per_tweet_list)
-users['urls_per_tweets'] = np.array(urls_per_tweet_list)
-users['hashtags_per_tweets'] = np.array(hashtags_per_tweet_list)
-users['retweets_per_tweets'] = np.array(retweets_per_tweet_list)
-users['favorite_per_tweets'] = np.array(favorite_per_tweet_list)
+users['mentions_per_tweet'] = np.array(men_per_tweet_list)
+users['urls_per_tweet'] = np.array(urls_per_tweet_list)
+users['hashtags_per_tweet'] = np.array(hashtags_per_tweet_list)
+users['retweets_per_tweet'] = np.array(retweets_per_tweet_list)
+users['favorites_per_tweet'] = np.array(favorite_per_tweet_list)
 users['frequ_minutes_tweet'] = np.array(frequ_minutes_tweet_list)
 
 writer = pd.ExcelWriter('cresci2015Prepocessed.xlsx', engine='xlsxwriter')
@@ -88,3 +91,5 @@ users.to_excel(writer, sheet_name='Sheet1')
 writer.save()
 
 users.to_csv('cresci2015Preprocessed.csv')
+
+
